@@ -1,4 +1,4 @@
-# HKO Rador image Generator
+# HKO Radar image Generator
 Generate the HKO radar images into gif
 
 This repository contains golang code for downloading JPEG images from the Hong Kong Observatory's website, converting them into a GIF file, and deleting temporary files.
