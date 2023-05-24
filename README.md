@@ -24,7 +24,9 @@ The code performs the following tasks:
    ```
 
 ## Example output
+Below is the gif generated:
 ![generated gif](https://github.com/macma/hko-radar-gif-generator/blob/main/animation.gif?raw=true)
+It's same as the animation for each picture play back as in [HKO playback](https://www.hko.gov.hk/tc/wxinfo/radars/radar.htm?pv_mode=playback)
 
 ## Image Copyright
 The generated GIF file and the JPEG images used to create it are sourced from the Hong Kong Observatory (HKO) under their terms of use and copyright policy. For more information regarding the usage and restrictions, please refer to the [HKO Terms of Use](https://www.hko.gov.hk/en/appweb/applink.htm).

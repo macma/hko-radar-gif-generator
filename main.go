@@ -17,7 +17,13 @@ import (
 	"github.com/nfnt/resize"
 )
 
+// 8 means 256, accepted values: 6, 7, 8
+var scale int = 6
+var km int
+
 func main() {
+
+	km = intPow(2, scale)
 	downloadImages()
 	makeGIF()
 }
@@ -59,7 +65,7 @@ func makeGIF() {
 		delays = append(delays, 30) // Set the delay between frames (in 1/100th of a second)
 	}
 
-	gifFilename := "animation.gif"
+	gifFilename := fmt.Sprintf("animation_%03d.gif", km)
 	err = saveGIF(gifFilename, frames, delays)
 	if err != nil {
 		log.Fatal(err)
@@ -96,7 +102,7 @@ func saveGIF(filename string, frames []*image.Paletted, delays []int) error {
 }
 
 func downloadImages() {
-	baseURL := "https://www.weather.gov.hk/wxinfo/radars/rad_256_png/2d256nradar_"
+	baseURL := fmt.Sprintf("https://www.weather.gov.hk/wxinfo/radars/rad_%03d_png/2d%03dnradar_", km, km)
 	currentTime := time.Now()
 
 	// Create the "tmp" folder if it doesn't exist
@@ -153,4 +159,14 @@ func downloadImage(url, filePath string) error {
 	}
 
 	return nil
+}
+
+func intPow(base, exponent int) int {
+	result := 1
+
+	for i := 0; i < exponent; i++ {
+		result *= base
+	}
+
+	return result
 }
