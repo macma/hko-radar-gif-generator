@@ -18,7 +18,7 @@ import (
 )
 
 // 8 means 256, accepted values: 6, 7, 8
-var scale int = 6
+var scale int = 8
 var km int
 
 func main() {
@@ -74,10 +74,10 @@ func makeGIF() {
 	fmt.Printf("GIF file generated: %s\n", gifFilename)
 
 	// Delete the "tmp" folder and its contents
-	err = os.RemoveAll("tmp")
-	if err != nil {
-		log.Fatal(err)
-	}
+	// err = os.RemoveAll("tmp")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 }
 
 func saveGIF(filename string, frames []*image.Paletted, delays []int) error {
@@ -103,6 +103,7 @@ func saveGIF(filename string, frames []*image.Paletted, delays []int) error {
 
 func downloadImages() {
 	baseURL := fmt.Sprintf("https://www.weather.gov.hk/wxinfo/radars/rad_%03d_png/2d%03dnradar_", km, km)
+
 	currentTime := time.Now()
 
 	// Create the "tmp" folder if it doesn't exist
@@ -130,7 +131,7 @@ func downloadImages() {
 		imageURL := fmt.Sprintf("%s%s.jpg", baseURL, formattedTimestamp)
 		fmt.Printf("the url to be downloaded is: %v\n", imageURL)
 		// Set the file path to save the image
-		filePath := filepath.Join("tmp", fmt.Sprintf("image_%d.jpg", noOfPic-i-1))
+		filePath := filepath.Join("tmp", fmt.Sprintf("image_%v.jpg", formatSingleDigit(noOfPic-i-1)))
 
 		// Download the image
 		err := downloadImage(imageURL, filePath)
@@ -139,7 +140,13 @@ func downloadImages() {
 		}
 	}
 }
-
+func formatSingleDigit(number int) string {
+	if number < 10 {
+		return "0" + fmt.Sprint(number)
+	} else {
+		return fmt.Sprint(number)
+	}
+}
 func downloadImage(url, filePath string) error {
 	response, err := http.Get(url)
 	if err != nil {
