@@ -74,10 +74,10 @@ func makeGIF() {
 	fmt.Printf("GIF file generated: %s\n", gifFilename)
 
 	// Delete the "tmp" folder and its contents
-	// err = os.RemoveAll("tmp")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	err = os.RemoveAll("tmp")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func saveGIF(filename string, frames []*image.Paletted, delays []int) error {
